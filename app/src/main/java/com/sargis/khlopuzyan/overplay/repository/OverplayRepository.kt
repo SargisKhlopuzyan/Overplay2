@@ -17,7 +17,7 @@ import kotlin.math.abs
 interface OverplayRepository {
     suspend fun getLastSavedDateTime(): String?
     suspend fun saveCurrentDateTime()
-    suspend fun getCurrentDateTime(): String
+    fun getCurrentDateTime(): String
     suspend fun getSessionCount(): Int?
     suspend fun saveSessionCount(count: Int)
     fun calculateTotalMinutesBetweenTwoDates(startDateTime: String, endDateTime: String): Long
@@ -45,7 +45,7 @@ class OverplayRepositoryImpl(
         )
     }
 
-    override suspend fun getCurrentDateTime(): String {
+    override fun getCurrentDateTime(): String {
         val sdf = SimpleDateFormat(Constants.App.DATE_TIME_FORMATTER, Locale.getDefault())
         return sdf.format(Date())
     }
